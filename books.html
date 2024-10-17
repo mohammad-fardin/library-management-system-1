@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Books</title>
+    <style>
+        
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .header-section {
+            text-align: center;
+            background: linear-gradient(to right, #e0f7fa, #ffffff);
+            padding: 20px 0;
+        }
+
+        .header-section h1 {
+            font-size: 36px;
+            color: #003366;
+            
+            
+        }
+
+        .header-section p {
+            font-size: 18px; /* Adjust paragraph font size */
+            color: #333; /* Color for paragraph text */
+             margin-top: 0; /* Ensure no margin is applied above the paragraph */
+             margin-bottom: 70px;
+}
+
+        .books-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .book-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        .book-card img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .book-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #003366;
+        }
+
+        .book-author {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .book-price {
+            font-size: 16px;
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(to right, #00796b, #004d40);
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(to right, #004d40, #00796b);
+        }
+
+        /* Back to Home link */
+        .back-home {
+    text-align: center;
+    margin: 20px auto; /* This centers the element horizontally */
+}
+
+.back-home-link {
+    text-decoration: none;
+    color: #00796b;
+    font-weight: bold;
+    background-color: #e0f7fa;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    display: inline-block; /* Keeps it inline for proper centering */
+}
+
+.back-home-link:hover {
+    background-color: #004d40;
+    color: #ffffff;
+}
+      
+/* Search bar container */
+.search-bar {
+    position: absolute;
+    top: 30px;  /* Adjust according to your layout */
+    left: 20px; /* Position it from the left */
+    width: 250px; /* Adjust the width as necessary */
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 30px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for 3D effect */
+    padding: 5px 10px; /* Padding inside the search bar */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    margin-top: 125px;
+    margin-left: 10px;
+}
+
+
+/* Search input field */
+.search-bar input {
+    border: none; /* Remove default border */
+    outline: none; /* Remove default focus outline */
+    flex: 1; /* Allow input to take available space */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 30px;
+    color: #333; /* Text color */
+}
+
+/* Placeholder text styling */
+.search-bar input::placeholder {
+    color: #aaa;
+    font-style: normal;
+}
+
+/* Search button styling */
+.search-bar button {
+    background: linear-gradient(to right, #004d40, #00796b); /* Gradient for the button */
+    border: none;
+    border-radius: 50%; /* Rounded button */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Button icon color */
+.search-bar button i {
+    color: #fff; /* White search icon */
+    font-size: 18px;
+}
+
+/* Button hover effect */
+.search-bar button:hover {
+    background-color: #005bb5; /* Darker shade on hover */
+}
+
+.add-to-cart {
+    background: linear-gradient(to right, #00796b, #004d40);
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px; /* Add margin to create a gap */
+}
+
+.add-to-cart:hover {
+    background: linear-gradient(to right, #004d40, #00796b);
+}
+
+
+
+
+.read-online-button {
+    background: linear-gradient(to right, #00796b, #004d40); /* Same background as Buy Now */
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.read-online-button:hover {
+    background: linear-gradient(to right, #004d40, #00796b); /* Same hover effect as Buy Now */
+    transition: background 0.3s ease; /* Add transition for smooth hover effect */
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #ccc;
+}
+
+.my-account {
+    position: absolute;
+    top: 30px; /* Adjust to fit your layout */
+    right: 20px; /* Position it in the top right corner */
+    font-size: 16px; /* Adjust text size */
+    display: flex;
+    align-items: center;
+    margin-top: 145px;
+    margin-right: 55px;
+}
+
+.my-account a {
+    text-decoration: none;
+    color: transparent; /* Make text transparent */
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #004d40, #00796b); /* Gradient for the text */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    background-clip: text; /* For non-WebKit browsers */
+    font-weight: bold; /* Make the text bold */
+}
+
+.my-account i {
+    margin-right: 8px; /* Space between icon and text */
+    font-size: 18px; /* Adjust icon size */
+    color: transparent; /* Make icon color transparent */
+    background: linear-gradient(to right, #004d40, #00796b); /* Gradient for the icon */
+    -webkit-background-clip: text; /* Clip the background to the icon */
+    background-clip: text; /* For non-WebKit browsers */
+}
+
+.my-account a:hover i {
+    color: #00796b; /* Change icon color on hover */
+}
+
+.my-account a:hover {
+    color: #00796b; /* Change text color on hover */
+}
+
+    </style>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+</head>
+<body>
+
+    <div class="header-section">
+        <h1>Shariatpur Polytechnic Institute Library's Books Collection</h1>
+        <p>Explore our wide range of books</p>
+        
+    </div>
+
+    <div class="search-bar">
+        <input type="text" id="bookSearch" onkeyup="searchBooks()" placeholder="Search for books...">
+        <button type="button">
+            <i class="fa fa-search"></i> <!-- This uses Font Awesome for a search icon -->
+        </button>
+    </div>
+
+
+
+    <div class="my-account">
+        <a href="account.html">
+            <i class="fas fa-user"></i> My Account
+        </a>
+    </div>
+    
+    
+    <!-- Books Section -->
+    <div class="books-container">
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+            
+
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+            
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+        <!-- Book 1 -->
+        <div class="book-card">
+            <img src="images/rich.jpg" alt="Book Cover">
+            <div class="book-title">Rich Dad Poor Dad
+            </div>
+            <div class="book-author">by Robert T kiyosaki</div>
+            <div class="book-price">$19.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 2 -->
+        <div class="book-card">
+            <img src="images/time (1).jpeg" alt="Book Cover">
+            <div class="book-title"> The Power of Habit</div>
+            <div class="book-author">by Charles Duhigg</div>
+            <div class="book-price">$24.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 3 -->
+        <div class="book-card">
+            <img src="images/eat (1).jpg" alt="Book Cover">
+            <div class="book-title">Eat That Frog</div>
+            <div class="book-author">by Brian Tracy</div>
+            <div class="book-price">$14.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 4 -->
+        <div class="book-card">
+            <img src="images/ato (1).jpeg" alt="Book Cover">
+            <div class="book-title">Atomic Habits</div>
+            <div class="book-author"> by James Clear</div>
+            <div class="book-price">$29.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Book 5 -->
+        <div class="book-card">
+            <img src="images/deep (1).jpg" alt="Book Cover">
+            <div class="book-title">Deep Work</div>
+            <div class="book-author">by Cal Newport</div>
+            <div class="book-price">$9.99</div>
+            <button class="add-to-cart">Buy Now</button>
+        </div>
+
+        <!-- Add more books in a similar way -->
+    </div>
+
+    <!-- Back to Home Link -->
+    <div class="back-home">
+        <a href="index.html" class="back-home-link">← Back to Home</a>
+    </div>
+    
+   
+
+
+        <script>
+            function searchBooks() {
+                // Get the search input value and convert it to lowercase for case-insensitive matching
+                const searchInput = document.getElementById('bookSearch').value.toLowerCase();
+                
+                // Get all the book cards
+                const bookCards = document.querySelectorAll('.book-card');
+                
+                // Loop through each book card
+                bookCards.forEach(card => {
+                    // Get the book title and author text content
+                    const title = card.querySelector('.book-title').textContent.toLowerCase();
+                    const author = card.querySelector('.book-author').textContent.toLowerCase();
+        
+                    // Check if the title or author includes the search input
+                    if (title.includes(searchInput) || author.includes(searchInput)) {
+                        // Show the card if there's a match
+                        card.style.display = 'block';
+                    } else {
+                        // Hide the card if there's no match
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+        
+
+       <script>// Wait until the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select all book-card divs
+            const books = document.querySelectorAll('.book-card');
+        
+            // Create the Read Online button HTML
+            const readOnlineButton = '<button class="read-online-button">Read Online</button>';
+        
+            // Loop through each book-card div and append the button
+            books.forEach(book => {
+                book.insertAdjacentHTML('beforeend', readOnlineButton);
+            });
+        });
+        </script>
+
+
+
+
+
+
+
+
+
+<footer class="footer" style="background-color: black; color: white; padding: 20px; text-align: center;">
+    <div class="footer-content" style="margin-bottom: 20px;">
+        <p>&copy; 2024 Shariatpur Polytechnic Institute Library. All rights reserved.</p>
+        <p>
+            Burirhat, Shariatpur, Dhaka, Bangladesh | (+880) 56-7890 | 
+            <a href="mailto:shariatpurpolytechnicinstituteiibrary@library.com">shariatpurpolytechnicinstituteiibrary@library.com</a>
+        </p>
+    </div>
+    <div class="footer-links" style="display: flex; justify-content: center; gap: 30px;">
+        <div class="footer-contact" style="display: flex; align-items: center;">
+            <img src="images/contactusicon.png" alt="Contact Us Icon" class="contact-icon" style="width: 20px; height: 20px; margin-right: 5px;">
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="footer-about" style="display: flex; align-items: center;">
+            <img src="images/aboutusicon.png" alt="About Us Icon" class="about-icon" style="width: 20px; height: 20px; margin-right: 5px;">
+            <a href="about.html">About Us</a>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+</body>
+</html>
